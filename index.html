@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NSBE B-Section · Kettering University</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue:       #3AADDD;
+  --blue-dim:   #1E7FAA;
+  --blue-glow:  rgba(58,173,221,0.18);
+  --blue-faint: rgba(58,173,221,0.07);
+  --ink:        #050C12;
+  --ink2:       #0C1820;
+  --ink3:       #132030;
+  --ink4:       #1C2D3E;
+  --slate:      #3A5068;
+  --muted:      #6B8AA0;
+  --pale:       #A8C4D4;
+  --white:      #EEF5F9;
+  --radius:     4px;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--ink);
+  color: var(--white);
+  font-family: 'Syne', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CUSTOM CURSOR ── */
+#cursor {
+  position: fixed;
+  width: 10px; height: 10px;
+  background: var(--blue);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%,-50%);
+  transition: width .2s, height .2s, background .2s;
+  mix-blend-mode: screen;
+}
+#cursor-ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(58,173,221,0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: all .12s ease;
+}
+body:hover #cursor { opacity:1; }
+
+/* ── GRAIN OVERLAY ── */
+body::after {
+  content:'';
+  position:fixed; inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:0.035;
+  pointer-events:none;
+  z-index:9998;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width:3px; }
+::-webkit-scrollbar-track { background:var(--ink); }
+::-webkit-scrollbar-thumb { background:var(--blue-dim); }
+
+/* ══════════════════════════════
+   NAV
+══════════════════════════════ */
+nav {
+  position:fixed; top:0; left:0; right:0;
+  z-index:500;
+  height:68px;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 52px;
+  background:rgba(5,12,18,0.88);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(58,173,221,0.12);
+}
+
+.nav-wordmark {
+  display:flex; align-items:baseline; gap:10px;
+  text-decoration:none;
+}
+.nav-wordmark-nsbe {
+  font-family:'Syne', sans-serif;
+  font-weight:800;
+  font-size:1.1rem;
+  letter-spacing:4px;
+  color:var(--blue);
+}
+.nav-wordmark-section {
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.6rem;
+  letter-spacing:3px;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+
+.nav-links {
+  display:flex; gap:40px; list-style:none;
+}
+.nav-links a {
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.6rem;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:var(--muted);
+  text-decoration:none;
+  transition:color .2s;
+  position:relative;
+}
+.nav-links a::after {
+  content:'';
+  position:absolute; left:0; bottom:-4px; right:0;
+  height:1px; background:var(--blue);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform .25s;
+}
+.nav-links a:hover { color:var(--white); }
+.nav-links a:hover::after { transform:scaleX(1); }
+
+.nav-join {
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.6rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  padding:8px 20px;
+  border:1px solid var(--blue);
+  color:var(--blue);
+  background:transparent;
+  cursor:none;
+  text-decoration:none;
+  transition:all .25s;
+}
+.nav-join:hover { background:var(--blue); color:var(--ink); }
+
+/* ══════════════════════════════
+   HERO
+══════════════════════════════ */
+.hero {
+  min-height:100vh;
+  display:flex; flex-direction:column;
+  justify-content:flex-end;
+  padding:140px 52px 80px;
+  position:relative;
+  overflow:hidden;
+}
+
+/* animated grid lines background */
+.hero-grid {
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(58,173,221,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(58,173,221,0.04) 1px, transparent 1px);
+  background-size:60px 60px;
+  animation:gridSlide 20s linear infinite;
+}
+@keyframes gridSlide {
+  from { transform:translate(0,0); }
+  to   { transform:translate(60px,60px); }
+}
+
+.hero-glow {
+  position:absolute;
+  top:-200px; right:-200px;
+  width:700px; height:700px;
+  background:radial-gradient(circle, rgba(58,173,221,0.12) 0%, transparent 65%);
+  pointer-events:none;
+  animation:pulse 6s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:0.7; transform:scale(1); }
+  50%      { opacity:1;   transform:scale(1.08); }
+}
+
+.hero-tag {
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.62rem;
+  letter-spacing:4px;
+  color:var(--blue);
+  text-transform:uppercase;
+  opacity:0;
+  animation:fadeUp .7s .2s forwards;
+  position:relative;
+  display:inline-flex; align-items:center; gap:12px;
+}
+.hero-tag::before {
+  content:'';
+  display:inline-block; width:40px; height:1px;
+  background:var(--blue);
+}
+
+.hero-display {
+  font-family:'Syne', sans-serif;
+  font-weight:800;
+  font-size:clamp(4.5rem,10vw,11rem);
+  line-height:0.9;
+  letter-spacing:-2px;
+  margin-top:20px;
+  opacity:0;
+  animation:fadeUp .8s .4s forwards;
+  position:relative;
+}
+.hero-display em {
+  font-family:'Instrument Serif', serif;
+  font-style:italic;
+  font-weight:400;
+  color:var(--blue);
+  letter-spacing:-1px;
+}
+
+.hero-sub-row {
+  display:flex; align-items:flex-end; justify-content:space-between;
+  margin-top:40px;
+  opacity:0;
+  animation:fadeUp .8s .6s forwards;
+  position:relative;
+}
+.hero-sub-text {
+  font-size:1rem;
+  font-weight:400;
+  color:var(--muted);
+  max-width:420px;
+  line-height:1.7;
+}
+.hero-sub-text strong { color:var(--pale); font-weight:500; }
+
+.hero-scroll-hint {
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.55rem;
+  letter-spacing:3px;
+  color:var(--slate);
+  text-transform:uppercase;
+  display:flex; flex-direction:column; align-items:center; gap:10px;
+}
+.hero-scroll-hint::after {
+  content:'';
+  width:1px; height:48px;
+  background:linear-gradient(var(--slate),transparent);
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(24px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ══════════════════════════════
+   SHARED SECTION STYLES
+══════════════════════════════ */
+.page-section {
+  max-width:1180px; margin:0 auto;
+  padding:100px 52px;
+}
+.page-section + .page-section { padding-top:0; }
+
+.divider { border:none; border-top:1px solid var(--ink4); }
+
+.eyebrow {
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.58rem;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:var(--blue);
+  display:flex; align-items:center; gap:14px;
+  margin-bottom:20px;
+}
+.eyebrow::before { content:''; width:28px; height:1px; background:var(--blue); }
+
+.section-h {
+  font-family:'Syne', sans-serif;
+  font-weight:800;
+  font-size:clamp(2.2rem,4.5vw,4rem);
+  line-height:1;
+  letter-spacing:-1px;
+  color:var(--white);
+}
+.section-h em {
+  font-family:'Instrument Serif', serif;
+  font-style:italic; font-weight:400;
+  color:var(--blue);
+}
+
+/* ══════════════════════════════
+   ABOUT
+══════════════════════════════ */
+.about-layout {
+  display:grid;
+  grid-template-columns:1.1fr 1fr;
+  gap:80px;
+  margin-top:60px;
+  align-items:start;
+}
+.about-body {
+  font-size:1.05rem;
+  font-weight:400;
+  color:var(--muted);
+  line-height:1.85;
+}
+.about-body p + p { margin-top:18px; }
+.about-body strong { color:var(--pale); font-weight:600; }
+
+.stats-stack { display:flex; flex-direction:column; gap:3px; }
+.stat-item {
+  background:var(--ink2);
+  padding:28px 32px;
+  display:flex; align-items:center; justify-content:space-between;
+  border-left:3px solid var(--blue-dim);
+  transition:border-color .2s, background .2s;
+}
+.stat-item:hover { background:var(--ink3); border-color:var(--blue); }
+.stat-number {
+  font-family:'Syne', sans-serif;
+  font-weight:800;
+  font-size:2.8rem;
+  color:var(--blue);
+  line-height:1;
+}
+.stat-label {
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.58rem;
+  letter-spacing:2px;
+  color:var(--slate);
+  text-transform:uppercase;
+  text-align:right;
+}
+
+/* ══════════════════════════════
+   OFFICERS
+══════════════════════════════ */
+.officers-section { background:var(--ink2); padding:80px 0; }
+.officers-inner {
+  max-width:1180px; margin:0 auto;
+  padding:0 52px;
+}
+.officers-grid {
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:3px;
+  margin-top:56px;
+}
+.officer-tile {
+  background:var(--ink3);
+  padding:32px 24px;
+  text-align:center;
+  transition:background .25s, transform .25s;
+  position:relative;
+  overflow:hidden;
+}
+.officer-tile::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0;
+  height:2px;
+  background:linear-gradient(90deg, transparent, var(--blue), transparent);
+  opacity:0;
+  transition:opacity .3s;
+}
+.officer-tile:hover { background:var(--ink4); transform:translateY(-4px); }
+.officer-tile:hover::before { opacity:1; }
+
+.officer-monogram {
+  width:52px; height:52px;
+  border-radius:50%;
+  background:var(--blue-faint);
+  border:1px solid var(--blue-dim);
+  display:flex; align-items:center; justify-content:center;
+  margin:0 auto 16px;
+  font-family:'Syne', sans-serif;
+  font-weight:800;
+  font-size:1.1rem;
+  color:var(--blue);
+}
+.officer-name {
+  font-weight:600;
+  font-size:0.9rem;
+  color:var(--white);
+  margin-bottom:6px;
+}
+.officer-role {
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.55rem;
+  letter-spacing:2px;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+
+/* ══════════════════════════════
+   NEWSLETTER
+══════════════════════════════ */
+.nl-featured {
+  display:grid;
+  grid-template-columns:1.3fr 1fr;
+  gap:3px;
+  margin-top:56px;
+}
+.nl-card {
+  background:var(--ink2);
+  padding:40px;
+  position:relative;
+  overflow:hidden;
+  cursor:none;
+  transition:background .2s;
+}
+.nl-card:hover { background:var(--ink3); }
+.nl-card::after {
+  content:'';
+  position:absolute; bottom:0; left:0; right:0;
+  height:2px;
+  background:linear-gradient(90deg, var(--blue), transparent);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform .4s;
+}
+.nl-card:hover::after { transform:scaleX(1); }
+
+.nl-badge {
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.55rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--blue);
+  background:var(--blue-faint);
+  border:1px solid rgba(58,173,221,0.2);
+  padding:4px 10px;
+  display:inline-block;
+  margin-bottom:20px;
+}
+.nl-date {
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.58rem;
+  letter-spacing:2px;
+  color:var(--slate);
+  margin-bottom:14px;
+}
+.nl-title {
+  font-family:'Syne', sans-serif;
+  font-weight:700;
+  font-size:1.55rem;
+  line-height:1.2;
+  color:var(--white);
+  margin-bottom:14px;
+}
+.nl-card.big .nl-title {
+  font-size:2.2rem;
+}
+.nl-excerpt {
+  font-size:0.88rem;
+  color:var(--muted);
+  line-height:1.75;
+  font-weight:400;
+}
+.nl-link {
+  display:inline-flex; align-items:center; gap:8px;
+  margin-top:24px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.6rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--blue);
+  text-decoration:none;
+  transition:gap .2s;
+}
+.nl-link:hover { gap:14px; }
+
+.nl-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:3px;
+  margin-top:3px;
+}
+
+/* ══════════════════════════════
+   CALENDAR
+══════════════════════════════ */
+.calendar-wrap {
+  margin-top:56px;
+}
+
+.cal-controls {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:28px;
+}
+.cal-month-label {
+  font-family:'Syne', sans-serif;
+  font-weight:700;
+  font-size:1.6rem;
+  letter-spacing:-0.5px;
+  color:var(--white);
+}
+.cal-month-label span {
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.85rem;
+  font-weight:400;
+  color:var(--muted);
+  margin-left:12px;
+  letter-spacing:2px;
+}
+.cal-nav {
+  display:flex; gap:8px;
+}
+.cal-nav-btn {
+  width:36px; height:36px;
+  background:var(--ink3);
+  border:1px solid var(--ink4);
+  color:var(--muted);
+  font-size:1rem;
+  cursor:none;
+  display:flex; align-items:center; justify-content:center;
+  transition:all .2s;
+}
+.cal-nav-btn:hover { background:var(--blue); color:var(--ink); border-color:var(--blue); }
+
+.cal-header {
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:2px;
+  margin-bottom:2px;
+}
+.cal-header-cell {
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.58rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--slate);
+  text-align:center;
+  padding:10px 0;
+}
+
+.cal-grid {
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:2px;
+}
+
+.cal-day {
+  background:var(--ink2);
+  min-height:88px;
+  padding:10px;
+  position:relative;
+  cursor:none;
+  transition:background .2s;
+  overflow:visible;
+}
+.cal-day.empty { background:var(--ink); cursor:default; }
+.cal-day.today { background:var(--ink3); }
+.cal-day.today .cal-day-num { color:var(--blue); }
+.cal-day.has-event { cursor:none; }
+.cal-day:not(.empty):hover { background:var(--ink4); z-index:10; }
+
+.cal-day-num {
+  font-family:'Syne', sans-serif;
+  font-weight:700;
+  font-size:0.88rem;
+  color:var(--slate);
+  line-height:1;
+}
+.cal-day.today .cal-day-num::after {
+  content:'';
+  display:block;
+  width:4px; height:4px;
+  border-radius:50%;
+  background:var(--blue);
+  margin-top:4px;
+}
+
+.cal-event-pip {
+  margin-top:8px;
+  display:flex; flex-direction:column; gap:3px;
+}
+.cal-pip {
+  background:var(--blue-dim);
+  border-radius:2px;
+  padding:2px 5px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.5rem;
+  letter-spacing:1px;
+  color:var(--white);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:100%;
+}
+.cal-pip.type-workshop { background:#1A5E3A; }
+.cal-pip.type-social   { background:#5A2D82; }
+.cal-pip.type-meeting  { background:var(--blue-dim); }
+.cal-pip.type-career   { background:#7A3010; }
+
+/* ── TOOLTIP ── */
+.cal-tooltip {
+  display:none;
+  position:absolute;
+  left:50%; bottom:calc(100% + 8px);
+  transform:translateX(-50%);
+  background:var(--ink);
+  border:1px solid var(--blue-dim);
+  padding:16px 18px;
+  width:220px;
+  z-index:200;
+  box-shadow:0 12px 48px rgba(0,0,0,0.6), 0 0 0 1px rgba(58,173,221,0.1);
+  pointer-events:none;
+}
+.cal-tooltip::after {
+  content:'';
+  position:absolute;
+  top:100%; left:50%; transform:translateX(-50%);
+  border:6px solid transparent;
+  border-top-color:var(--blue-dim);
+}
+.cal-day:hover .cal-tooltip { display:block; }
+/* flip tooltip down if near top of calendar */
+.cal-day.flip-down .cal-tooltip {
+  top:calc(100% + 8px); bottom:auto;
+}
+.cal-day.flip-down .cal-tooltip::after {
+  top:auto; bottom:100%;
+  border-top-color:transparent;
+  border-bottom-color:var(--blue-dim);
+}
+
+.tooltip-date {
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.55rem;
+  letter-spacing:3px;
+  color:var(--blue);
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+.tooltip-event {
+  padding:10px 0;
+  border-bottom:1px solid var(--ink4);
+}
+.tooltip-event:last-child { border-bottom:none; padding-bottom:0; }
+.tooltip-event:first-child { padding-top:0; }
+.tooltip-event-name {
+  font-weight:600;
+  font-size:0.82rem;
+  color:var(--white);
+  margin-bottom:4px;
+}
+.tooltip-event-time {
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.55rem;
+  letter-spacing:1px;
+  color:var(--muted);
+}
+.tooltip-event-loc {
+  font-size:0.75rem;
+  color:var(--slate);
+  margin-top:3px;
+}
+.tooltip-event-type {
+  display:inline-block;
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.48rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  padding:2px 6px;
+  margin-bottom:6px;
+  border-radius:2px;
+}
+.type-label-meeting  { background:rgba(30,127,170,0.2); color:var(--blue); }
+.type-label-workshop { background:rgba(26,94,58,0.3);   color:#5EC98A; }
+.type-label-social   { background:rgba(90,45,130,0.3);  color:#C07AEF; }
+.type-label-career   { background:rgba(122,48,16,0.3);  color:#F5904A; }
+
+.cal-legend {
+  display:flex; gap:20px; margin-top:16px; flex-wrap:wrap;
+}
+.legend-item {
+  display:flex; align-items:center; gap:7px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.55rem;
+  letter-spacing:1.5px;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+.legend-dot {
+  width:8px; height:8px; border-radius:2px;
+}
+
+/* ══════════════════════════════
+   RESOURCES
+══════════════════════════════ */
+.resources-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:3px;
+  margin-top:56px;
+}
+.res-card {
+  background:var(--ink2);
+  padding:36px 32px 40px;
+  position:relative;
+  overflow:hidden;
+  transition:background .2s, transform .25s;
+  cursor:none;
+}
+.res-card:hover { background:var(--ink3); transform:translateY(-3px); }
+.res-card-icon {
+  font-size:2rem; margin-bottom:22px;
+  display:block;
+}
+.res-card-title {
+  font-family:'Syne', sans-serif;
+  font-weight:700;
+  font-size:1.1rem;
+  color:var(--white);
+  margin-bottom:10px;
+}
+.res-card-body {
+  font-size:0.82rem;
+  color:var(--muted);
+  line-height:1.7;
+  font-weight:400;
+}
+.res-card-arrow {
+  position:absolute; bottom:22px; right:22px;
+  color:var(--ink4);
+  font-size:1.2rem;
+  transition:color .2s, transform .2s;
+}
+.res-card:hover .res-card-arrow { color:var(--blue); transform:translate(3px,-3px); }
+
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
+footer {
+  background:var(--ink2);
+  border-top:1px solid var(--ink4);
+  padding:72px 52px 0;
+}
+.footer-top {
+  display:grid;
+  grid-template-columns:1.5fr 1fr 1fr;
+  gap:80px;
+  max-width:1180px; margin:0 auto;
+  padding-bottom:56px;
+}
+.footer-brand-name {
+  font-family:'Syne', sans-serif;
+  font-weight:800;
+  font-size:2.2rem;
+  letter-spacing:-1px;
+  color:var(--blue);
+  display:block;
+  margin-bottom:6px;
+}
+.footer-brand-sub {
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.58rem;
+  letter-spacing:3px;
+  color:var(--slate);
+  text-transform:uppercase;
+}
+.footer-brand-desc {
+  margin-top:20px;
+  font-size:0.85rem;
+  color:var(--muted);
+  line-height:1.7;
+}
+
+.footer-col-head {
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.58rem;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:var(--blue);
+  margin-bottom:20px;
+}
+.footer-link-list { list-style:none; }
+.footer-link-list li { margin-bottom:12px; }
+.footer-link-list a {
+  font-size:0.88rem;
+  color:var(--muted);
+  text-decoration:none;
+  transition:color .2s;
+}
+.footer-link-list a:hover { color:var(--white); }
+
+.footer-bottom {
+  max-width:1180px; margin:0 auto;
+  border-top:1px solid var(--ink4);
+  padding:22px 0;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.footer-copy {
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.55rem;
+  letter-spacing:2px;
+  color:var(--slate);
+}
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+@media (max-width:900px) {
+  nav { padding:0 24px; }
+  .nav-links { display:none; }
+  .hero { padding:120px 24px 64px; }
+  .page-section { padding:64px 24px; }
+  .about-layout { grid-template-columns:1fr; gap:40px; }
+  .officers-grid { grid-template-columns:repeat(2,1fr); }
+  .nl-featured { grid-template-columns:1fr; }
+  .nl-grid { grid-template-columns:1fr; }
+  .resources-grid { grid-template-columns:1fr 1fr; }
+  footer { padding:48px 24px 0; }
+  .footer-top { grid-template-columns:1fr; gap:40px; }
+  .officers-inner { padding:0 24px; }
+  .cal-day { min-height:60px; }
+  #cursor, #cursor-ring { display:none; }
+  body { cursor:auto; }
+  a, button { cursor:pointer; }
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#" class="nav-wordmark">
+    <span class="nav-wordmark-nsbe">NSBE</span>
+    <span class="nav-wordmark-section">B-Section · Kettering</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#officers">Officers</a></li>
+    <li><a href="#newsletter">Newsletter</a></li>
+    <li><a href="#calendar">Calendar</a></li>
+    <li><a href="#resources">Resources</a></li>
+  </ul>
+  <a href="#" class="nav-join">Join B-Section →</a>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-tag">B-Section · Kettering University · Est. ——</div>
+
+  <h1 class="hero-display">
+    Built to<br><em>Engineer</em><br>Greatness.
+  </h1>
+
+  <div class="hero-sub-row">
+    <p class="hero-sub-text">
+      <strong>NSBE B-Section at Kettering University</strong> empowers Black engineers through community, mentorship, and professional development. We show up every term to grow, connect, and lead.
+    </p>
+    <div class="hero-scroll-hint">Scroll</div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<hr class="divider">
+<div class="page-section" id="about">
+  <div class="eyebrow">Our Foundation</div>
+  <h2 class="section-h">Who We <em>Are</em></h2>
+
+  <div class="about-layout">
+    <div class="about-body">
+      <p>
+        NSBE B-Section is one of two chapters of the <strong>National Society of Black Engineers</strong> at Kettering University, organized around the school's alternating academic term schedule. B-Section operates during Kettering's B-term, building a consistent and energized community every time we're on campus.
+      </p>
+      <p>
+        We are more than a club — we're a <strong>professional family</strong>. Through technical workshops, career networking events, mentorship programs, and community service, we equip our members with what they need to thrive in engineering and beyond.
+      </p>
+      <p>
+        Add your chapter history, mission statement, and specific initiatives here. This space is yours — tell the B-Section story.
+      </p>
+    </div>
+
+    <div class="stats-stack">
+      <div class="stat-item">
+        <div class="stat-number">——</div>
+        <div class="stat-label">Active<br>Members</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">——</div>
+        <div class="stat-label">Events<br>This Term</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">——</div>
+        <div class="stat-label">Industry<br>Partners</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">——</div>
+        <div class="stat-label">Years<br>Running</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── OFFICERS ── -->
+<section class="officers-section" id="officers">
+  <div class="officers-inner">
+    <div class="eyebrow">Leadership</div>
+    <h2 class="section-h">B-Section <em>Officers</em></h2>
+
+    <div class="officers-grid">
+      <div class="officer-tile">
+        <div class="officer-monogram">——</div>
+        <div class="officer-name">Justin Bankston</div>
+        <div class="officer-role">President</div>
+      </div>
+      <div class="officer-tile">
+        <div class="officer-monogram">——</div>
+        <div class="officer-name">Jada Drake</div>
+        <div class="officer-role">Vice President</div>
+      </div>
+      <div class="officer-tile">
+        <div class="officer-monogram">——</div>
+        <div class="officer-name">Name Here</div>
+        <div class="officer-role">Treasurer</div>
+      </div>
+      <div class="officer-tile">
+        <div class="officer-monogram">——</div>
+        <div class="officer-name">Name Here</div>
+        <div class="officer-role">Secretary</div>
+      </div>
+      <div class="officer-tile">
+        <div class="officer-monogram">——</div>
+        <div class="officer-name">Name Here</div>
+        <div class="officer-role">Comm. Chair</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── NEWSLETTER ── -->
+<hr class="divider">
+<div class="page-section" id="newsletter">
+  <div class="eyebrow">Latest Updates</div>
+  <h2 class="section-h">News&shy;letter</h2>
+
+  <div class="nl-featured">
+    <div class="nl-card big">
+      <span class="nl-badge">B-Section · Featured Issue</span>
+      <div class="nl-date">Month Day, Year</div>
+      <div class="nl-title">Your Featured Newsletter Headline Goes Right Here</div>
+      <p class="nl-excerpt">Use this featured card for your most important update of the term — a president's letter, a major event recap, or a significant announcement. Replace this with real content.</p>
+      <a href="#" class="nl-link">Read Full Issue ↗</a>
+    </div>
+    <div class="nl-card">
+      <span class="nl-badge">B-Section · Spotlight</span>
+      <div class="nl-date">Month Day, Year</div>
+      <div class="nl-title">Member Spotlight or Secondary Headline</div>
+      <p class="nl-excerpt">A secondary featured story — member spotlight, scholarship winner announcement, or co-op/internship news. Swap in your real content here.</p>
+      <a href="#" class="nl-link">Read More ↗</a>
+    </div>
+  </div>
+
+  <div class="nl-grid">
+    <div class="nl-card">
+      <span class="nl-badge">Issue · ——</span>
+      <div class="nl-date">Month Day, Year</div>
+      <div class="nl-title">Newsletter Issue Headline</div>
+      <p class="nl-excerpt">Brief teaser for this newsletter issue. Use this card to archive past issues so members can browse the chapter's history.</p>
+      <a href="#" class="nl-link">Read ↗</a>
+    </div>
+    <div class="nl-card">
+      <span class="nl-badge">Issue · ——</span>
+      <div class="nl-date">Month Day, Year</div>
+      <div class="nl-title">Newsletter Issue Headline</div>
+      <p class="nl-excerpt">Brief teaser for this newsletter issue. Use this card to archive past issues so members can browse the chapter's history.</p>
+      <a href="#" class="nl-link">Read ↗</a>
+    </div>
+    <div class="nl-card">
+      <span class="nl-badge">Issue · ——</span>
+      <div class="nl-date">Month Day, Year</div>
+      <div class="nl-title">Newsletter Issue Headline</div>
+      <p class="nl-excerpt">Brief teaser for this newsletter issue. Use this card to archive past issues so members can browse the chapter's history.</p>
+      <a href="#" class="nl-link">Read ↗</a>
+    </div>
+    <div class="nl-card">
+      <span class="nl-badge">Issue · ——</span>
+      <div class="nl-date">Month Day, Year</div>
+      <div class="nl-title">Newsletter Issue Headline</div>
+      <p class="nl-excerpt">Brief teaser for this newsletter issue. Use this card to archive past issues so members can browse the chapter's history.</p>
+      <a href="#" class="nl-link">Read ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── CALENDAR ── -->
+<hr class="divider">
+<div class="page-section" id="calendar">
+  <div class="eyebrow">What's Happening</div>
+  <h2 class="section-h">Events <em>Calendar</em></h2>
+
+  <div class="calendar-wrap">
+    <div class="cal-controls">
+      <div class="cal-month-label" id="cal-label">June <span id="cal-year">2026</span></div>
+      <div class="cal-nav">
+        <button class="cal-nav-btn" id="cal-prev" title="Previous month">&#8592;</button>
+        <button class="cal-nav-btn" id="cal-next" title="Next month">&#8594;</button>
+      </div>
+    </div>
+
+    <div class="cal-header">
+      <div class="cal-header-cell">Sun</div>
+      <div class="cal-header-cell">Mon</div>
+      <div class="cal-header-cell">Tue</div>
+      <div class="cal-header-cell">Wed</div>
+      <div class="cal-header-cell">Thu</div>
+      <div class="cal-header-cell">Fri</div>
+      <div class="cal-header-cell">Sat</div>
+    </div>
+
+    <div class="cal-grid" id="cal-grid"></div>
+
+    <div class="cal-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#1E7FAA"></div>Meeting</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#1A5E3A"></div>Volunteering</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#5A2D82"></div>Social</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#7A3010"></div>Career</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── RESOURCES ── -->
+<hr class="divider">
+<div class="page-section" id="resources">
+  <div class="eyebrow">Member Hub</div>
+  <h2 class="section-h">Resources</h2>
+
+  <div class="resources-grid">
+    <div class="res-card">
+      <span class="res-card-icon">📋</span>
+      <div class="res-card-title">Membership Info</div>
+      <p class="res-card-body">How to join B-Section, dues information, meeting schedule, and what membership gives you access to.</p>
+      <div class="res-card-arrow">↗</div>
+    </div>
+    <div class="res-card">
+      <span class="res-card-icon">💼</span>
+      <div class="res-card-title">Career Resources</div>
+      <p class="res-card-body">Resume workshops, mock interviews, NSBE national career fair, and co-op / internship resources.</p>
+      <div class="res-card-arrow">↗</div>
+    </div>
+    <div class="res-card">
+      <span class="res-card-icon">🎓</span>
+      <div class="res-card-title">Scholarships</div>
+      <p class="res-card-body">NSBE national and regional scholarships plus external opportunities — deadlines and application links.</p>
+      <div class="res-card-arrow">↗</div>
+    </div>
+    <div class="res-card">
+      <span class="res-card-icon">🤝</span>
+      <div class="res-card-title">Mentorship</div>
+      <p class="res-card-body">Connect with upperclassmen, alumni, and industry professionals through the chapter mentorship program.</p>
+      <div class="res-card-arrow">↗</div>
+    </div>
+    <div class="res-card">
+      <span class="res-card-icon">📚</span>
+      <div class="res-card-title">Academic Support</div>
+      <p class="res-card-body">Study sessions, tutoring resources, and peer support across engineering disciplines at Kettering.</p>
+      <div class="res-card-arrow">↗</div>
+    </div>
+    <div class="res-card">
+      <span class="res-card-icon">📬</span>
+      <div class="res-card-title">Contact & Socials</div>
+      <p class="res-card-body">Reach B-Section officers, follow us on Instagram, join the GroupMe, and stay connected all year.</p>
+      <div class="res-card-arrow">↗</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <span class="footer-brand-name">NSBE B-Section</span>
+      <div class="footer-brand-sub">Kettering University · Flint, MI</div>
+      <p class="footer-brand-desc">National Society of Black Engineers<br>B-Section chapter at Kettering University.<br>Building the next generation of Black engineers.</p>
+    </div>
+    <div>
+      <div class="footer-col-head">Navigate</div>
+      <ul class="footer-link-list">
+        <li><a href="#about">About</a></li>
+        <li><a href="#officers">Officers</a></li>
+        <li><a href="#newsletter">Newsletter</a></li>
+        <li><a href="#calendar">Calendar</a></li>
+        <li><a href="#resources">Resources</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-head">Connect</div>
+      <ul class="footer-link-list">
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">GroupMe</a></li>
+        <li><a href="#">Email Officers</a></li>
+        <li><a href="#">NSBE National</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 NSBE B-Section · Kettering University</span>
+    <span class="footer-copy">Built with pride · Flint, MI</span>
+  </div>
+</footer>
+
+<script>
+/* ── CURSOR ── */
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0, my=0, rx=0, ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
+(function animRing(){
+  rx += (mx-rx)*0.12; ry += (my-ry)*0.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+})();
+document.querySelectorAll('a,button,.nl-card,.res-card,.officer-tile,.cal-day:not(.empty)').forEach(el => {
+  el.addEventListener('mouseenter', ()=>{ cur.style.width='18px'; cur.style.height='18px'; ring.style.width='52px'; ring.style.height='52px'; });
+  el.addEventListener('mouseleave', ()=>{ cur.style.width='10px'; cur.style.height='10px'; ring.style.width='36px'; ring.style.height='36px'; });
+});
+
+/* ── SCROLL REVEAL ── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
+  });
+}, { threshold:0.08 });
+document.querySelectorAll('.stat-item,.officer-tile,.nl-card,.res-card').forEach(el => {
+  el.style.opacity='0'; el.style.transform='translateY(18px)';
+  el.style.transition='opacity .5s ease, transform .5s ease';
+  obs.observe(el);
+});
+
+/* ══════════════════════════════
+   CALENDAR ENGINE
+══════════════════════════════ */
+
+// ── EDIT YOUR EVENTS HERE ──
+// Format: key = "YYYY-M-D" (no leading zeros)
+const EVENTS = {
+  // Sample placeholder events — replace with real B-Section events
+  "2026-6-3":  [{ name:"E-Board Meeting", time:"6:00 PM", loc:"AB 2-301", type:"meeting" }],
+  "2026-6-9":  [{ name:"Resume Workshop", time:"5:30 PM", loc:"C-Building Lab", type:"workshop" },
+                { name:"Exec Check-in",   time:"8:00 PM", loc:"Online",        type:"meeting" }],
+  "2026-6-15": [{ name:"E-Board Meeting", time:"12:20 PM", loc:"NSBE Lounge", type:"meeting" }],
+  "2026-6-18": [{ name:"End-of-Term Social", time:"7:00 PM", loc:"Campus Rec", type:"social" }],
+  "2026-6-22": [{ name:"E-Board Meeting", time:"12:20 PM", loc:"NSBE Lounge", type:"meeting" }],
+  "2026-6-25": [{ name:"Scholarship Info Session", time:"5:00 PM", loc:"Online", type:"career" }],
+  "2026-7-7":  [{ name:"General Meeting", time:"6:00 PM", loc:"AB 2-301", type:"meeting" }],
+  "2026-7-12": [{ name:"Coding Workshop", time:"2:00 PM", loc:"CS Lab", type:"workshop" }],
+  "2026-7-19": [{ name:"Networking Mixer", time:"6:30 PM", loc:"IMC", type:"social" }],
+  "2026-7-26": [{ name:"Career Fair Prep", time:"5:00 PM", loc:"AB 1-101", type:"career" }],
+};
+
+const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const today = new Date();
+let viewYear = today.getFullYear();
+let viewMonth = today.getMonth(); // 0-indexed
+
+function buildCalendar(year, month) {
+  const grid = document.getElementById('cal-grid');
+  const label = document.getElementById('cal-label');
+  const yearEl = document.getElementById('cal-year');
+  grid.innerHTML = '';
+  label.childNodes[0].textContent = MONTHS[month] + ' ';
+  yearEl.textContent = year;
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month+1, 0).getDate();
+  const totalCells = Math.ceil((firstDay + daysInMonth) / 7) * 7;
+
+  for(let i=0; i<totalCells; i++){
+    const dayNum = i - firstDay + 1;
+    const cell = document.createElement('div');
+    cell.className = 'cal-day';
+
+    if(dayNum < 1 || dayNum > daysInMonth){
+      cell.classList.add('empty');
+    } else {
+      // today highlight
+      if(year===today.getFullYear() && month===today.getMonth() && dayNum===today.getDate()){
+        cell.classList.add('today');
+      }
+
+      const numEl = document.createElement('div');
+      numEl.className = 'cal-day-num';
+      numEl.textContent = dayNum;
+      cell.appendChild(numEl);
+
+      const key = `${year}-${month+1}-${dayNum}`;
+      const evts = EVENTS[key];
+
+      if(evts && evts.length){
+        cell.classList.add('has-event');
+
+        // pips
+        const pipWrap = document.createElement('div');
+        pipWrap.className = 'cal-event-pip';
+        evts.forEach(ev => {
+          const pip = document.createElement('div');
+          pip.className = `cal-pip type-${ev.type}`;
+          pip.textContent = ev.name;
+          pipWrap.appendChild(pip);
+        });
+        cell.appendChild(pipWrap);
+
+        // tooltip
+        const tip = document.createElement('div');
+        tip.className = 'cal-tooltip';
+        const dateStr = `${MONTHS[month].slice(0,3)} ${dayNum}, ${year}`;
+        tip.innerHTML = `<div class="tooltip-date">${dateStr}</div>`;
+        evts.forEach(ev => {
+          tip.innerHTML += `
+            <div class="tooltip-event">
+              <div class="tooltip-event-type type-label-${ev.type}">${ev.type}</div>
+              <div class="tooltip-event-name">${ev.name}</div>
+              <div class="tooltip-event-time">⏱ ${ev.time}</div>
+              <div class="tooltip-event-loc">📍 ${ev.loc}</div>
+            </div>`;
+        });
+        cell.appendChild(tip);
+
+        // flip tooltip down for first 2 rows
+        const row = Math.floor(i / 7);
+        if(row < 2) cell.classList.add('flip-down');
+      }
+    }
+    grid.appendChild(cell);
+  }
+}
+
+document.getElementById('cal-prev').addEventListener('click', () => {
+  viewMonth--; if(viewMonth<0){ viewMonth=11; viewYear--; }
+  buildCalendar(viewYear, viewMonth);
+});
+document.getElementById('cal-next').addEventListener('click', () => {
+  viewMonth++; if(viewMonth>11){ viewMonth=0; viewYear++; }
+  buildCalendar(viewYear, viewMonth);
+});
+
+buildCalendar(viewYear, viewMonth);
+</script>
+</body>
+</html>
