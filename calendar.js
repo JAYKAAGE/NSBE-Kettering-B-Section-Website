@@ -13,7 +13,7 @@ const EVENTS = {
     { name: "General Meeting",        time: "6:00 PM", loc: "AB 2-301",        type: "meeting"  }
   ],
   "2026-6-9":  [
-    { name: "Resume Workshop",        time: "5:30 PM", loc: "C-Building Lab",  type: "workshop" },
+    { name: "Resume Workshop",        time: "5:30 PM", loc: "C-Building Lab",  type: "volunteer" },
     { name: "Exec Check-in",          time: "8:00 PM", loc: "Online",          type: "meeting"  }
   ],
   "2026-6-15": [
@@ -32,7 +32,7 @@ const EVENTS = {
     { name: "General Meeting",        time: "6:00 PM", loc: "AB 2-301",        type: "meeting"  }
   ],
   "2026-7-12": [
-    { name: "Coding Workshop",        time: "2:00 PM", loc: "CS Lab",          type: "workshop" }
+    { name: "Coding Workshop",        time: "2:00 PM", loc: "CS Lab",          type: "volunteer" }
   ],
   "2026-7-19": [
     { name: "Networking Mixer",       time: "6:30 PM", loc: "IMC",             type: "social"   }
