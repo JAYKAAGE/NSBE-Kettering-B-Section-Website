@@ -478,7 +478,7 @@ footer {
   font-size:0.5rem; letter-spacing:1px; color:var(--white);
   white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%;
 }
-.cal-pip.type-workshop { background:#1A5E3A; }
+.cal-pip.type-volunteer { background:#1A5E3A; }
 .cal-pip.type-social   { background:#5A2D82; }
 .cal-pip.type-meeting  { background:var(--blue-dim); }
 .cal-pip.type-career   { background:#7A3010; }
@@ -528,7 +528,7 @@ footer {
   margin-bottom:6px; border-radius:2px;
 }
 .type-label-meeting  { background:rgba(30,127,170,0.2); color:var(--blue); }
-.type-label-workshop { background:rgba(26,94,58,0.3);   color:#5EC98A; }
+.type-label-volunteer { background:rgba(26,94,58,0.3);   color:#5EC98A; }
 .type-label-social   { background:rgba(90,45,130,0.3);  color:#C07AEF; }
 .type-label-career   { background:rgba(122,48,16,0.3);  color:#F5904A; }
 .cal-legend {
