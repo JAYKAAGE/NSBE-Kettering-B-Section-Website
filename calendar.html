@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NSBE B-Section · Kettering University</title>
+  <title>Calendar · NSBE B-Section · Kettering</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -26,60 +26,46 @@
   <a href="about.html#join" class="nav-join">Join B-Section →</a>
 </nav>
 
-<!-- ── HERO ── -->
-<section class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
+<!-- ── BANNER ── -->
+<div class="page-banner">
+  <div class="page-banner-grid"></div>
+  <div class="page-banner-glow"></div>
+  <div class="page-banner-tag">What's Happening</div>
+  <h1 class="page-banner-title">Events <em>Calendar</em></h1>
+</div>
 
-  <div class="hero-tag">B-Section · Kettering University · Est. ——</div>
-
-  <h1 class="hero-display">
-    Built to<br><em>Engineer</em><br>Greatness.
-  </h1>
-
-  <div class="hero-sub-row">
-    <p class="hero-sub-text">
-      <strong>NSBE B-Section at Kettering University</strong> empowers Black engineers through community, mentorship, and professional development. We show up every term to grow, connect, and lead.
-    </p>
-    <div class="hero-scroll-hint">Scroll</div>
-  </div>
-</section>
-
-<!-- ── QUICK LINKS ── -->
-<hr class="divider">
+<!-- ── CALENDAR ── -->
 <div class="page-section">
-  <div class="eyebrow">Explore</div>
-  <h2 class="section-h">What We <em>Offer</em></h2>
+  <div class="eyebrow">B-Section Schedule</div>
+  <h2 class="section-h">Monthly <em>View</em></h2>
 
-  <div class="home-links-row">
-    <a href="about.html" class="home-link-card">
-      <div>
-        <div class="home-link-label">01 · Who We Are</div>
-        <div class="home-link-title">About B-Section</div>
+  <div class="calendar-wrap">
+    <div class="cal-controls">
+      <div class="cal-month-label" id="cal-label">June <span id="cal-year">2026</span></div>
+      <div class="cal-nav">
+        <button class="cal-nav-btn" id="cal-prev" title="Previous month">&#8592;</button>
+        <button class="cal-nav-btn" id="cal-next" title="Next month">&#8594;</button>
       </div>
-      <div class="home-link-arrow">↗</div>
-    </a>
-    <a href="newsletter.html" class="home-link-card">
-      <div>
-        <div class="home-link-label">02 · Latest Updates</div>
-        <div class="home-link-title">Newsletter</div>
-      </div>
-      <div class="home-link-arrow">↗</div>
-    </a>
-    <a href="calendar.html" class="home-link-card">
-      <div>
-        <div class="home-link-label">03 · What's Coming</div>
-        <div class="home-link-title">Events Calendar</div>
-      </div>
-      <div class="home-link-arrow">↗</div>
-    </a>
-    <a href="resources.html" class="home-link-card">
-      <div>
-        <div class="home-link-label">04 · Member Hub</div>
-        <div class="home-link-title">Resources</div>
-      </div>
-      <div class="home-link-arrow">↗</div>
-    </a>
+    </div>
+
+    <div class="cal-header">
+      <div class="cal-header-cell">Sun</div>
+      <div class="cal-header-cell">Mon</div>
+      <div class="cal-header-cell">Tue</div>
+      <div class="cal-header-cell">Wed</div>
+      <div class="cal-header-cell">Thu</div>
+      <div class="cal-header-cell">Fri</div>
+      <div class="cal-header-cell">Sat</div>
+    </div>
+
+    <div class="cal-grid" id="cal-grid"></div>
+
+    <div class="cal-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#1E7FAA"></div>Meeting</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#1A5E3A"></div>Workshop</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#5A2D82"></div>Social</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#7A3010"></div>Career</div>
+    </div>
   </div>
 </div>
 
@@ -119,5 +105,6 @@
 </footer>
 
 <script src="main.js"></script>
+<script src="calendar.js"></script>
 </body>
 </html>
